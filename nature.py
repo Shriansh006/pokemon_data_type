@@ -1,3 +1,16 @@
+def display_all_natures(nature_effects):
+    """Displays all available natures and their effects."""
+    print("\nAvailable Natures and Their Effects:\n")
+    for nature, effects in nature_effects.items():
+        effects_str = " | ".join(effects)
+        print(f"{nature.capitalize()}: {effects_str}")
+
+
+def get_nature_effect(nature, nature_effects):
+    """Gets the effects of a specific nature."""
+    return nature_effects.get(nature, ("This nature does not exist :("))
+
+
 
 nature_effects = {
     "adamant": ("Attack stats increases", "Sp.Attack stats decreases"),
@@ -26,12 +39,23 @@ nature_effects = {
     "serious": ("This pokemon is neutral in nature",)
 }
 
+while True:
+    print("\nMenu:")
+    print("1. View nature effects")
+    print("2. View all natures")
+    print("3. Exit")
+    
+    choice = input("Enter your choice (1/2/3): ").strip()
 
-nature = input("Nature: ").strip().lower()
-
-
-if nature in nature_effects:
-    for effect in nature_effects[nature]:
-        print(effect)
-else:
-    print("This nature does not exist :(")
+    if choice == "1":
+        nature = input("Enter a nature: ").strip().lower()
+        effects = get_nature_effect(nature, nature_effects)
+        for effect in effects:
+            print(effect)
+    elif choice == "2":
+        display_all_natures(nature_effects)
+    elif choice == "3":
+        print("Goodbye!")
+        break
+    else:
+        print("Invalid choice. Please try again.")
